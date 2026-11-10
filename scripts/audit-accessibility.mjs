@@ -252,16 +252,21 @@ try {
       );
       check(
         (await page.locator(".evidence-tile, .hero-credit, #metrics").count()) === 0 &&
-          (await page.locator("#results .deck-figure img[aria-describedby]").count()) === 2 &&
+          (await page.locator("#results .deck-figure img[aria-describedby]").count()) === 0 &&
+          (await page.locator("#results > .figure-caption").count()) === 2 &&
+          (await page.locator("#results .result-step h3").count()) === 2 &&
           (await page.locator("#conclusion .deck-lead").count()) === 1 &&
-          (await page.locator("h1").innerText()) === site.title,
-        "No data tiles; results charts carry text descriptions and a short conclusion follows; the title is the paper title",
+          (await page.locator("h1").innerText()) === site.displayTitle &&
+          (await page.locator(".hero-subtitle").innerText()) === site.subtitle,
+        "No data tiles; each result chart has a one-line caption under its key result; the display title and subtitle are shown",
       );
       check(
         (await page.locator("#background .rv-ends img").count()) === 2 &&
           (await page.locator("#method .network-compare img").count()) === 4 &&
-          (await page.locator("#experiment .deck-figure img").count()) === 2,
-        "Deck images appear in the background, methodology, and experiment",
+          (await page.locator("#method .intersection-pair .deck-figure img").count()) === 2 &&
+          (await page.locator("#method .method-slide .figure-title").innerText()) === "Decentralized Reinforcement Learning for Vehicle Coordination" &&
+          (await page.locator("#method .method-slide .figure-caption").count()) === 1,
+        "Deck images appear in the background and methodology; the Stop/Go figure has its title and caption",
       );
       check(
         await page
@@ -415,8 +420,13 @@ try {
               ".visual-overview > section > h2, .visual-overview > section > .section-heading > h2, .visual-overview > section > .vision-heading > h2",
             )
             .allTextContents(),
-        ) === JSON.stringify(["Background", "Methodology", "Results", "Conclusion", "Citation"]),
-        "Story follows the proposal deck: background, methodology, experiment, results, conclusion",
+        ) === JSON.stringify(["Background", "Problem", "Our Rationale", "Methodology", "Results", "Conclusion", "Citation", "Related Publications"]),
+        "Story: background, problem, rationale, methodology, results, conclusion, citation, related publications",
+      );
+      check(
+        (await page.locator("#related-publications .related-list > li").count()) === 10 &&
+          (await page.locator('#related-publications .related-title a[href^="https://doi.org/10."]').count()) === 10,
+        "Ten related mixed-traffic publications link to their DOI records",
       );
       await page
         .getByRole("button", { name: "Copy citation", exact: true })
@@ -503,7 +513,7 @@ try {
         ),
       preference + ": no automatic motion on entry",
     );
-    await p.locator("#experiment").scrollIntoViewIfNeeded();
+    await p.locator("#hybrid-control").scrollIntoViewIfNeeded();
     await p.waitForTimeout(200);
     check(await paused(p), preference + ": scrolling does not start media");
     await atTop(p);

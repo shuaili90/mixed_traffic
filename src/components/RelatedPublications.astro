@@ -1,0 +1,30 @@
+---
+// Mixed-traffic papers listed under "Mixed Traffic Control and Coordination" on
+// https://fluidic-city.github.io/publications/ (checked 10 November 2026).
+// Titles, authors, venues, pages, and DOIs follow the Crossref records.
+const papers = [
+  { authors: "Jia Pan, Weizi Li, Wenxi Liu, Iftekharul Islam, Ke Guo, Yajue Yang, Shuai Zhang, Xuebo Ji, Dawei Wang", title: "Mixed Crowd Navigation: Perception, Interaction, Planning, and Control", venue: "Annual Review of Control, Robotics, and Autonomous Systems, 9, 325–349", year: "2026", doi: "10.1146/annurev-control-032024-023929" },
+  { authors: "Iftekharul Islam, Weizi Li, Xuan Wang, Shuai Li, Kevin Heaslip", title: "Heterogeneous Mixed Traffic Control and Coordination", venue: "IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), 8261–8267", year: "2025", doi: "10.1109/IROS60139.2025.11245808" },
+  { authors: "Muyang Fan, Songyang Liu, Shuai Li, Weizi Li", title: "Origin-Destination Pattern Effects on Large-Scale Mixed Traffic Control via Multi-Agent Reinforcement Learning", venue: "IEEE International Conference on Intelligent Transportation Systems (ITSC), 4163–4168", year: "2025", doi: "10.1109/ITSC60802.2025.11423820" },
+  { authors: "Dawei Wang, Weizi Li, Lei Zhu, Jia Pan", title: "Learning to Control and Coordinate Mixed Traffic Through Robot Vehicles at Complex and Unsignalized Intersections", venue: "The International Journal of Robotics Research, 44(5), 805–825", year: "2025", doi: "10.1177/02783649241284069" },
+  { authors: "Bibek Poudel, Weizi Li, Kevin Heaslip", title: "EnduRL: Enhancing Safety, Stability, and Efficiency of Mixed Traffic Under Real-World Perturbations Via Reinforcement Learning", venue: "IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), 13671–13678", year: "2024", doi: "10.1109/IROS58592.2024.10802689" },
+  { authors: "Bibek Poudel, Weizi Li, Shuai Li", title: "CARL: Congestion-Aware Reinforcement Learning for Imitation-based Perturbations in Mixed Traffic Control", venue: "IEEE International Conference on CYBER Technology in Automation, Control, and Intelligent Systems (CYBER), 7–14", year: "2024", doi: "10.1109/CYBER63482.2024.10749026" },
+  { authors: "Michael Villarreal, Bibek Poudel, Jia Pan, Weizi Li", title: "Mixed Traffic Control and Coordination from Pixels", venue: "IEEE International Conference on Robotics and Automation (ICRA), 4488–4494", year: "2024", doi: "10.1109/ICRA57147.2024.10610517" },
+  { authors: "Dawei Wang, Weizi Li, Jia Pan", title: "Large-Scale Mixed Traffic Control Using Dynamic Vehicle Routing and Privacy-Preserving Crowdsourcing", venue: "IEEE Internet of Things Journal, 11(2), 1981–1989", year: "2024", doi: "10.1109/JIOT.2023.3335292" },
+  { authors: "Michael Villarreal, Dawei Wang, Jia Pan, Weizi Li", title: "Analyzing Emissions and Energy Efficiency at Unsignalized Real-World Intersections Under Mixed Traffic Control", venue: "Forum for Innovative Sustainable Transportation Systems (FISTS), 1–7", year: "2024", doi: "10.1109/FISTS60717.2024.10485589" },
+  { authors: "Michael Villarreal, Bibek Poudel, Weizi Li", title: "Can ChatGPT Enable ITS? The Case of Mixed Traffic Control via Reinforcement Learning", venue: "IEEE International Conference on Intelligent Transportation Systems (ITSC), 3749–3755", year: "2023", doi: "10.1109/ITSC57777.2023.10422410" },
+];
+---
+<section class="section related-publications" id="related-publications" aria-labelledby="related-heading">
+  <div class="section-heading">
+    <h2 id="related-heading">Related Publications</h2>
+  </div>
+  <ol class="related-list">
+    {papers.map((paper) => <li>
+      <p class="related-title"><a href={`https://doi.org/${paper.doi}`}>{paper.title}</a></p>
+      <p class="related-authors">{paper.authors}</p>
+      <p class="related-venue"><span>{paper.venue}</span> · {paper.year}</p>
+    </li>)}
+  </ol>
+  <p class="fine-print">Mixed-traffic research listed by the <a href="https://fluidic-city.github.io/publications/">Fluidic City Lab</a>. Links open the publisher’s DOI record.</p>
+</section>

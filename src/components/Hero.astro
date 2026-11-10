@@ -17,7 +17,8 @@ import { asset } from "../data/paths";
   </div>
   <p class="sr-only" id="opening-visual-description">{opening.description.join(" ")}</p>
   <div class="hero-publication">
-    <h1 id="paper-title" class="project-display-title">{site.title}</h1>
+    <h1 id="paper-title" class="project-display-title">{site.displayTitle}</h1>
+    <p class="hero-subtitle">{site.subtitle}</p>
     <ul class="authors">
       {site.authors.map((author) => <li><a href={`mailto:${author.email}`}>{author.name}</a></li>)}
     </ul>

@@ -3,6 +3,8 @@
   "wordmark": "MIXED TRAFFIC",
   "shortTitle": "Learning to share the intersection.",
   "title": "Large-Scale Mixed-Traffic and Intersection Control using Multi-agent Reinforcement Learning",
+  "displayTitle": "Network-Scale Mixed-Traffic Control with Multi-Agent Reinforcement Learning",
+  "subtitle": "Coordinating human-driven vehicles, robot vehicles, and traffic signals across urban road networks.",
   "description": "Decentralized reinforcement learning for human-driven and robot vehicles across a 14-intersection urban road network.",
   "venue": "IROS 2025",
   "publication": "2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), pp. 13777–13784.",
