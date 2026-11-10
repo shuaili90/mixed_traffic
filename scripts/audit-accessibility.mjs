@@ -275,8 +275,10 @@ try {
         "Method figure stays large at desktop width",
       );
       check(
-        (await page.locator(".citation h2").evaluate((h) => parseFloat(getComputedStyle(h).fontSize))) <= 22,
-        "Citation heading uses a compact size",
+        (await page.locator("#related-publications h2").evaluate((h) => parseFloat(getComputedStyle(h).fontSize))) <= 22 &&
+          (await page.locator("#citation, .citation.section").count()) === 0 &&
+          (await page.locator("#related-publications .related-current #citation-text").count()) === 1,
+        "Publications heading is compact; the citation is merged into the first related publication",
       );
       check(
         (await page.locator("#vision, .scope-note, .section-deck, #figure-network figcaption").count()) === 0,
@@ -420,13 +422,14 @@ try {
               ".visual-overview > section > h2, .visual-overview > section > .section-heading > h2, .visual-overview > section > .vision-heading > h2",
             )
             .allTextContents(),
-        ) === JSON.stringify(["Background", "Problem", "Our Rationale", "Methodology", "Results", "Conclusion", "Citation", "Related Publications"]),
-        "Story: background, problem, rationale, methodology, results, conclusion, citation, related publications",
+        ) === JSON.stringify(["Background", "Problem", "Our Rationale", "Methodology", "Results", "Conclusion", "Related Publications"]),
+        "Story: background, problem, rationale, methodology, results, conclusion, related publications",
       );
       check(
-        (await page.locator("#related-publications .related-list > li").count()) === 10 &&
-          (await page.locator('#related-publications .related-title a[href^="https://doi.org/10."]').count()) === 10,
-        "Ten related mixed-traffic publications link to their DOI records",
+        (await page.locator("#related-publications .related-list > li").count()) === 11 &&
+          (await page.locator('#related-publications .related-title a[href^="https://doi.org/10."]').count()) === 11 &&
+          (await page.locator("#related-publications .related-list > li:first-child .related-title").innerText()) === site.title,
+        "This paper leads eleven mixed-traffic publications, each linked to its DOI record",
       );
       await page
         .getByRole("button", { name: "Copy citation", exact: true })

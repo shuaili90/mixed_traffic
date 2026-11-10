@@ -2,6 +2,16 @@
 // Mixed-traffic papers listed under "Mixed Traffic Control and Coordination" on
 // https://fluidic-city.github.io/publications/ (checked 10 November 2026).
 // Titles, authors, venues, pages, and DOIs follow the Crossref records.
+// This paper comes first, with its BibTeX; the others follow, newest first.
+import site from "../data/site.json";
+import { asset } from "../data/paths";
+const thisPaper = {
+  authors: site.authors.map((a) => a.name).join(", "),
+  title: site.title,
+  venue: "IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), 13777–13784",
+  year: site.year,
+  doi: site.doi,
+};
 const papers = [
   { authors: "Jia Pan, Weizi Li, Wenxi Liu, Iftekharul Islam, Ke Guo, Yajue Yang, Shuai Zhang, Xuebo Ji, Dawei Wang", title: "Mixed Crowd Navigation: Perception, Interaction, Planning, and Control", venue: "Annual Review of Control, Robotics, and Autonomous Systems, 9, 325–349", year: "2026", doi: "10.1146/annurev-control-032024-023929" },
   { authors: "Iftekharul Islam, Weizi Li, Xuan Wang, Shuai Li, Kevin Heaslip", title: "Heterogeneous Mixed Traffic Control and Coordination", venue: "IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), 8261–8267", year: "2025", doi: "10.1109/IROS60139.2025.11245808" },
@@ -20,6 +30,25 @@ const papers = [
     <h2 id="related-heading">Related Publications</h2>
   </div>
   <ol class="related-list">
+    <li class="related-current">
+      <p class="related-tag">This paper</p>
+      <p class="related-title"><a href={`https://doi.org/${thisPaper.doi}`}>{thisPaper.title}</a></p>
+      <p class="related-authors">{thisPaper.authors}</p>
+      <p class="related-venue"><span>{thisPaper.venue}</span> · {thisPaper.year}</p>
+      <div class="citation related-bibtex">
+        <div class="citation-box">
+          <div class="citation-toolbar">
+            <span>BibTeX</span><div>
+              <button id="copy-citation" hidden>Copy citation</button>
+            </div>
+          </div><pre
+            role="region"
+            tabindex="0"
+            aria-label="BibTeX citation, horizontally scrollable"><code id="citation-text">{site.bibtex}</code></pre>
+        </div>
+        <p id="citation-status" role="status" class="fine-print"></p>
+      </div>
+    </li>
     {papers.map((paper) => <li>
       <p class="related-title"><a href={`https://doi.org/${paper.doi}`}>{paper.title}</a></p>
       <p class="related-authors">{paper.authors}</p>
@@ -27,4 +56,22 @@ const papers = [
     </li>)}
   </ol>
   <p class="fine-print">Mixed-traffic research listed by the <a href="https://fluidic-city.github.io/publications/">Fluidic City Lab</a>. Links open the publisher’s DOI record.</p>
+  <p class="citation-links"><a href={asset("accessibility/")}>Accessibility &amp; media credits</a> · <a href={site.siteRepo}>Website source</a> · Template: <a href="https://github.com/RomanHauksson/academic-project-astro-template">Roman Hauksson</a></p>
 </section>
+<script>
+  const button = document.querySelector<HTMLButtonElement>("#copy-citation");
+  const code = document.querySelector<HTMLElement>("#citation-text");
+  const status = document.querySelector<HTMLElement>("#citation-status");
+  if (button && code && status) {
+    button.hidden = false;
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(code.textContent || "");
+        status.textContent = "Citation copied.";
+      } catch {
+        status.textContent =
+          "Copy is unavailable in this browser. Select the citation text.";
+      }
+    });
+  }
+</script>
